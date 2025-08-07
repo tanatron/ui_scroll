@@ -24,23 +24,74 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = List<String>.generate(50,(i) => 'Item ${i + 1}',
-    );
     return Scaffold(
       appBar: AppBar(title: Text('Chapter 6'), backgroundColor: Colors.red),
-      body: ListView.builder(
-        itemCount: items.length, // ใช้ความยาวของลิสต์ข้อมูลของเรา
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading:Icon(Icons.list),
-            title: Text(items[index]), // แสดงข้อมูลจากลิสต์
-            subtitle: Text(items[index]), // แสดงหมายเลขรายการ
-            // ไอคอนท้าย (ทางเลือก)
-            onTap: () {
-              print(items[index]);
-            },
-          );
-        },
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          // รูปภาพพื้นหลัง
+          Image.network(
+            'https://picsum.photos/id/1015/300/300',
+            fit: BoxFit.cover,
+          ),
+
+          // Text ที่กำหนดตำแหน่งไว้มุมบนซ้าย
+          Positioned(
+            top: 10.0,
+            left: 10.0,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              color: Colors.black.withOpacity(0.5), // พื้นหลังกึ่งโปร่งใส
+              child: const Text(
+                'Top Left',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 10.0,
+            right: 10.0,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              color: Colors.black.withOpacity(0.5), // พื้นหลังกึ่งโปร่งใส
+              child: const Text(
+                'Top Right',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+
+          Positioned(
+            bottom: 10.0,
+            left: 10.0,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              color: Colors.black.withOpacity(0.5), // พื้นหลังกึ่งโปร่งใส
+              child: const Text(
+                'Bottom Left',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          // Icon ที่กำหนดตำแหน่งไว้มุมล่างขวา
+          Positioned(
+            bottom: 10.0,
+            right: 10.0,
+            child: Container(
+              padding: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle, // ทำให้เป็นป้ายวงกลม
+              ),
+              child: const Icon(
+                Icons.notifications,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
